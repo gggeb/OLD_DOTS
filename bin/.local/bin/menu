@@ -1,0 +1,25 @@
+#!/bin/sh
+
+OPTIONS="LAUNCH\nPOWER"
+ANSWER=`echo -e "$OPTIONS" | dmenu`
+
+LAUNCH() {
+	exec dmenu_run
+}
+
+POWER() {
+	OPTIONS="LOG OFF\nSHUTDOWN\nREBOOT"
+	case `echo -e "$OPTIONS" | dmenu` in
+		"LOG OFF")
+			bspc quit
+			;;
+		"SHUTDOWN")
+			shutdown -p now
+			;;
+		"REBOOT")
+			shutdown -r now
+			;;
+	esac
+}
+
+$ANSWER

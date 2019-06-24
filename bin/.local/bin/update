@@ -1,0 +1,14 @@
+#!/bin/sh
+
+dir=`pwd`
+
+echo "-- render dotfiles"
+cd ~/.dots
+echo "y" | dm theme/.theme
+echo "-- make and install st"
+cd ~/.clones/st
+make install
+cd ~/.clones/dmenu
+make install
+
+cd $dir

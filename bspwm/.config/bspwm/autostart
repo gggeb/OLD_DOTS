@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# autostart
+
+setxkbmap gb
+xsetroot -cursor_name left_ptr &
+hsetroot -tile ~/.wall.gif -tint "#$THEME_CS_DARK_GREY"
+
+compton -b
+
+redshift &
+
+sxhkd &
