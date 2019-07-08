@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "~#THEME_FONT#~:size=~#THEME_FONT_SIZE#~";
+static char *font = "~#THEME_FONT#~:style=~#THEME_FONT_STYLE#~:size=~#THEME_FONT_SIZE#~";
 static int borderpx = 16;
 
 /*

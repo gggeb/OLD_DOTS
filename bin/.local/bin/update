@@ -4,11 +4,12 @@ dir=$(pwd)
 
 echo "-- render dotfiles"
 cd ~/.dots
-echo "y" | dm theme/.theme
+echo "y" | dm theme/.theme > /dev/null
 echo "-- make and install st"
 cd ~/.clones/st
-make install
+make install > /dev/null
+echo "-- make and install dmenu"
 cd ~/.clones/dmenu
-make install
+make install > /dev/null
 
-cd $dir
+cd "$dir"

@@ -32,3 +32,4 @@ static unsigned int lines      = 8;
  * for example: " /?\"&[]"
  */
 static const char worddelimiters[] = " ";
+
