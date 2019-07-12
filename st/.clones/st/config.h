@@ -1,121 +1,61 @@
-/* See LICENSE file for copyright and license details. */
+static char *font = "~#THEME_FONT#~:style=~#THEME_FONT_STYLE#~:pixelsize=~#THEME_FONT_SIZE#~";
+static int borderpx = 32;
 
-/*
- * appearance
- *
- * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
- */
-static char *font = "~#THEME_FONT#~:style=~#THEME_FONT_STYLE#~:size=~#THEME_FONT_SIZE#~";
-static int borderpx = 16;
-
-/*
- * What program is execed by st depends of these precedence rules:
- * 1: program passed with -e
- * 2: utmp option
- * 3: SHELL environment variable
- * 4: value of shell in /etc/passwd
- * 5: value of shell in config.h
- */
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
-/* identification sequence returned in DA and DECID */
 char *vtiden = "\033[?6c";
 
-/* Kerning / character bounding-box multipliers */
 static float cwscale = 1.0;
 static float chscale = 1.0;
 
-/*
- * word delimiter string
- *
- * More advanced example: L" `'\"()[]{}"
- */
 wchar_t *worddelimiters = L" ";
 
-/* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
 static unsigned int tripleclicktimeout = 600;
 
-/* alt screens */
 int allowaltscreen = 1;
 
-/* frames per second st should at maximum draw to the screen */
 static unsigned int xfps = 120;
 static unsigned int actionfps = 30;
 
-/*
- * blinking timeout (set to 0 to disable blinking) for the terminal blinking
- * attribute.
- */
 static unsigned int blinktimeout = 800;
 
-/*
- * thickness of underline and bar cursors
- */
 static unsigned int cursorthickness = 2;
 
-/*
- * bell volume. It must be a value between -100 and 100. Use 0 for disabling
- * it
- */
 static int bellvolume = 0;
 
-/* default TERM value */
 char *termname = "st-256color";
 
-/*
- * spaces per tab
- *
- * When you are changing this value, don't forget to adapt the »it« value in
- * the st.info and appropriately install the st.info in the environment where
- * you use this st version.
- *
- *	it#$tabspaces,
- *
- * Secondly make sure your kernel is not expanding tabs. When running `stty
- * -a` »tab0« should appear. You can tell the terminal to not expand tabs by
- *  running following command:
- *
- *	stty tabs
- */
 unsigned int tabspaces = 4;
 
-/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"#~#THEME_CS_BLACK#~",
-	"#~#THEME_CS_RED#~",
-	"#~#THEME_CS_GREEN#~",
-	"#~#THEME_CS_YELLOW#~",
-	"#~#THEME_CS_BLUE#~",
-	"#~#THEME_CS_MAGENTA#~",
-	"#~#THEME_CS_CYAN#~",
-	"#~#THEME_CS_GREY#~",
+	"#~#THEME_BLACK#~",
+	"#~#THEME_RED#~",
+	"#~#THEME_GREEN#~",
+	"#~#THEME_YELLOW#~",
+	"#~#THEME_BLUE#~",
+	"#~#THEME_MAGENTA#~",
+	"#~#THEME_CYAN#~",
+	"#~#THEME_GREY#~",
 
-	/* 8 bright colors */
-	"#~#THEME_CS_DARK_GREY#~",
-	"#~#THEME_CS_BRIGHT_RED#~",
-	"#~#THEME_CS_BRIGHT_GREEN#~",
-	"#~#THEME_CS_BRIGHT_YELLOW#~",
-	"#~#THEME_CS_BRIGHT_BLUE#~",
-	"#~#THEME_CS_BRIGHT_MAGENTA#~",
-	"#~#THEME_CS_BRIGHT_CYAN#~",
-	"#~#THEME_CS_WHITE#~",
+	"#~#THEME_DARK_GREY#~",
+	"#~#THEME_BRIGHT_RED#~",
+	"#~#THEME_BRIGHT_GREEN#~",
+	"#~#THEME_BRIGHT_YELLOW#~",
+	"#~#THEME_BRIGHT_BLUE#~",
+	"#~#THEME_BRIGHT_MAGENTA#~",
+	"#~#THEME_BRIGHT_CYAN#~",
+	"#~#THEME_WHITE#~",
 
 	[255] = 0,
 
-	/* more colors can be added after 255 to use with DefaultXX */
 	"#~#THEME_CS_GREY#~",
 	"#~#THEME_CS_DARK_GREY#~",
 };
 
 
-/*
- * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
- */
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
 static unsigned int defaultcs = 256;
@@ -128,44 +68,26 @@ static unsigned int defaultrcs = 257;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
-
-/*
- * Default columns and rows numbers
- */
+static unsigned int cursorshape = 6;
 
 static unsigned int cols = 80;
 static unsigned int rows = 24;
 
-/*
- * Default colour and shape of the mouse cursor
- */
 static unsigned int mouseshape = XC_xterm;
 static unsigned int mousefg = 7;
 static unsigned int mousebg = 0;
 
-/*
- * Color used to display font attributes when fontconfig selected a font which
- * doesn't match the ones requested.
- */
 static unsigned int defaultattr = 11;
 
-/*
- * Internal mouse shortcuts.
- * Beware that overloading Button1 will disable the selection.
- */
 static MouseShortcut mshortcuts[] = {
-	/* button               mask            string */
 	{ Button4,              XK_ANY_MOD,     "\031" },
 	{ Button5,              XK_ANY_MOD,     "\005" },
 };
 
-/* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
-	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
@@ -180,54 +102,12 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 };
 
-/*
- * Special keys (change & recompile st.info accordingly)
- *
- * Mask value:
- * * Use XK_ANY_MOD to match the key no matter modifiers state
- * * Use XK_NO_MOD to match the key alone (no modifiers)
- * appkey value:
- * * 0: no value
- * * > 0: keypad application mode enabled
- * *   = 2: term.numlock = 1
- * * < 0: keypad application mode disabled
- * appcursor value:
- * * 0: no value
- * * > 0: cursor application mode enabled
- * * < 0: cursor application mode disabled
- * crlf value
- * * 0: no value
- * * > 0: crlf mode is enabled
- * * < 0: crlf mode is disabled
- *
- * Be careful with the order of the definitions because st searches in
- * this table sequentially, so any XK_ANY_MOD must be in the last
- * position for a key.
- */
-
-/*
- * If you want keys other than the X11 function keys (0xFD00 - 0xFFFF)
- * to be mapped below, add them to this array.
- */
 static KeySym mappedkeys[] = { -1 };
 
-/*
- * State bits to ignore when matching key or button events.  By default,
- * numlock (Mod2Mask) and keyboard layout (XK_SWITCH_MOD) are ignored.
- */
 static uint ignoremod = Mod2Mask|XK_SWITCH_MOD;
 
-/*
- * Override mouse-select while mask is active (when MODE_MOUSE is set).
- * Note that if you want to use ShiftMask with selmasks, set this to an other
- * modifier, set to 0 to not use it.
- */
 static uint forceselmod = ShiftMask;
 
-/*
- * This is the huge key array which defines all compatibility to the Linux
- * world. Please decide about changes wisely.
- */
 static Key key[] = {
 	/* keysym           mask            string      appkey appcursor */
 	{ XK_KP_Home,       ShiftMask,      "\033[2J",       0,   -1},
@@ -441,21 +321,10 @@ static Key key[] = {
 	{ XK_F35,           XK_NO_MOD,      "\033[23;5~",    0,    0},
 };
 
-/*
- * Selection types' masks.
- * Use the same masks as usual.
- * Button1Mask is always unset, to make masks match between ButtonPress.
- * ButtonRelease and MotionNotify.
- * If no match is found, regular selection is used.
- */
 static uint selmasks[] = {
 	[SEL_RECTANGULAR] = Mod1Mask,
 };
 
-/*
- * Printable characters in ASCII, used to estimate the advance width
- * of single wide characters.
- */
 static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"

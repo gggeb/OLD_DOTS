@@ -1,11 +1,11 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'dylanaraps/wal.vim'
-
+Plug 'gggeb/gall.vim'
 Plug 'itchyny/lightline.vim'
+
 Plug 'Yggdroot/indentLine'
+
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
@@ -19,9 +19,12 @@ syntax on
 let g:is_kornshell=1
 
 set background=light
-colorscheme wal
+colorscheme gall
 
-let g:lightline={ 'colorscheme': 'wal' }
+let g:lightline={ 'colorscheme': 'gall',
+                \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
+                \ 'subseparator': { 'left': '░', 'right': '░' } }
+
 set noshowmode
 
 let g:indentLine_char='▏'

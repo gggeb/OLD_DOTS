@@ -13,10 +13,3 @@ export PAGER
 
 ENV="$HOME/.shrc"
 export ENV
-
-if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi
-
-# start x if not already started
-if [ "$DISPLAY" = "" ] && [ "$(tty)" = "/dev/ttyv0" ]; then
-    exec startx
-fi

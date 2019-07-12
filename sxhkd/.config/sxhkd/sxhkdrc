@@ -12,10 +12,8 @@ alt + d
     menu
 
 ## media keys
-XF86AudioRaiseVolume
-    mixer vol +5
-XF86AudioLowerVolume
-    mixer vol -5
+# XF86AudioRaiseVolume
+# XF86AudioLowerVolume
 XF86MonBrightnessUp
     xbacklight -inc 20
 XF86MonBrightnessDown

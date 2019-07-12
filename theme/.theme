@@ -1,8 +1,8 @@
 #!/bin/sh
 
-THEME_FONT="scientifica"
+THEME_FONT="curie"
 THEME_FONT_STYLE="Regular"
-THEME_FONT_SIZE="11"
+THEME_FONT_SIZE="12"
 
 export THEME_FONT
 export THEME_FONT_STYLE
