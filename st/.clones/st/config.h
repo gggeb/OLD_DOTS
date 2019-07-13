@@ -1,4 +1,4 @@
-static char *font = "~#THEME_FONT#~:style=~#THEME_FONT_STYLE#~:pixelsize=~#THEME_FONT_SIZE#~";
+static char *font = "~#THEME_FONT#~:style=~#THEME_FONT_STYLE#~:pixelsize=~#THEME_FONT_PIXELSIZE#~";
 static int borderpx = 32;
 
 static char *shell = "/bin/sh";
@@ -51,8 +51,8 @@ static const char *colorname[] = {
 
 	[255] = 0,
 
-	"#~#THEME_CS_GREY#~",
-	"#~#THEME_CS_DARK_GREY#~",
+	"#~#THEME_GREY#~",
+	"#~#THEME_DARK_GREY#~",
 };
 
 

@@ -12,8 +12,12 @@ alt + d
     menu
 
 ## media keys
-# XF86AudioRaiseVolume
-# XF86AudioLowerVolume
+XF86AudioRaiseVolume
+    pamixer -i 3
+XF86AudioLowerVolume
+    pamixer -d 3
+XF86AudioMute
+    pamixer -t
 XF86MonBrightnessUp
     xbacklight -inc 20
 XF86MonBrightnessDown

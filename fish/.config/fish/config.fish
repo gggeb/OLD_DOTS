@@ -10,4 +10,5 @@ end
 
 set fish_greeting ""
 
-alias sudo="sudo -E"
+alias poweroff="sudo poweroff"
+alias reboot="sudo reboot"

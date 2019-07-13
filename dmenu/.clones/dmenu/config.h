@@ -7,7 +7,7 @@ static unsigned int line_height = 32;
 static unsigned int disable_cursor = 1;
 
 static const char *fonts[] = {
-	"~#THEME_FONT#~:style=~#THEME_FONT_STYLE#~:pixelsize=~#THEME_FONT_SIZE#~"
+	"~#THEME_FONT#~:style=~#THEME_FONT_STYLE#~:pixelsize=~#THEME_FONT_PIXELSIZE#~"
 };
 static const char *prompt = NULL;
 static const char *colors[SchemeLast][2] = {

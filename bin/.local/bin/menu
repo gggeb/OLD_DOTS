@@ -1,7 +1,7 @@
 #!/bin/sh
 
 OPTIONS="LAUNCH\nPOWER"
-ANSWER=$(echo -e "$OPTIONS" | dmenu)
+ANSWER=$(echo "$OPTIONS" | dmenu)
 
 LAUNCH() {
     exec dmenu_run
@@ -9,15 +9,15 @@ LAUNCH() {
 
 POWER() {
     OPTIONS="LOG OFF\nSHUTDOWN\nREBOOT"
-    case $(echo -e "$OPTIONS" | dmenu) in
+    case $(echo "$OPTIONS" | dmenu) in
         "LOG OFF")
             bspc quit
             ;;
         "SHUTDOWN")
-            shutdown -p now
+            sudo poweroff
             ;;
         "REBOOT")
-            shutdown -r now
+            sudo reboot
             ;;
     esac
 }

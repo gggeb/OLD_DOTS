@@ -13,3 +13,7 @@ export PAGER
 
 ENV="$HOME/.shrc"
 export ENV
+
+if [ -z $DISPLAY ] && [ "$(tty)" = /dev/tty1 ]; then
+    exec startx
+fi
