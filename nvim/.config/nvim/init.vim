@@ -23,7 +23,7 @@ colorscheme gall
 
 let g:lightline={ 'colorscheme': 'gall',
                 \ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-                \ 'subseparator': { 'left': '-', 'right': '-' } }
+                \ 'subseparator': { 'left': '', 'right': '' } }
 
 set noshowmode
 

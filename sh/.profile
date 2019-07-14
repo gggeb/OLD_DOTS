@@ -15,5 +15,6 @@ ENV="$HOME/.shrc"
 export ENV
 
 if [ -z $DISPLAY ] && [ "$(tty)" = /dev/tty1 ]; then
-    exec startx
+    clear
+    exec startx > /dev/null 2>&1
 fi
