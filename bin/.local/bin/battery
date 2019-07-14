@@ -1,0 +1,81 @@
+#!/bin/sh
+
+usage() {
+    echo "USAGE: battery [FLAGS]"
+    echo "       -h, --help              output this message"
+    echo "       -o, --only_critical     only output if critical"
+    echo "       -l/-u, --lower/--upper  output only in upper/lower case"
+    echo "       -n, --notify            output to libnotify, not stdout"
+}
+
+fail() {
+    >&2 echo "$1"
+    exit
+}
+
+CRITICALLY_LOW=16
+PERCENTAGE="$(acpi | cut -d ' ' -f4 | sed 's/[^0-9]*//g')"
+STATUS="$(acpi | cut -d ' ' -f3 | tr -d ',')"
+
+CRITICAL=false
+
+if [ $PERCENTAGE -lt $CRITICALLY_LOW ]; then
+    CRITICAL=true
+fi
+
+only_critical=false
+notify=false
+case="normal"
+
+while [ $# -gt 0 ]; do
+    case $1 in
+        -h | --help)
+            usage
+            exit
+            ;;
+        -o | --only_critical)
+            only_critical=true
+            ;;
+        -n | --notify)
+            notify=true
+            ;;
+        -l | --lower)
+            case="lower"
+            ;;
+        -u | --upper)
+            case="upper"
+            ;;
+        *)
+            fail "invalid argument '$1'"
+            ;;
+    esac
+    shift
+done
+
+output="echo"
+
+if [ $notify = true ]; then
+    if [ $CRITICAL = true ]; then
+        output="notify-send --urgency=critical"
+    else
+        output="notify-send --urgency=normal"
+    fi
+fi
+
+if [ $CRITICAL = true ] && [ $STATUS = "Discharging" ]; then
+    case $case in
+        normal)
+            $output "Battery Low"
+            ;;
+        lower)
+            $output "battery low"
+            ;;
+        upper)
+            $output "BATTERY LOW"
+            ;;
+    esac
+else
+    if [ $only_critical = false ]; then
+        $output "$PERCENTAGE%"
+    fi
+fi
