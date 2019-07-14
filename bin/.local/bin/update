@@ -1,15 +1,26 @@
 #!/bin/sh
 
+compile=false
+if [ "$1" = "-c" ] || [ "$1" = "--compile" ]; then
+    compile=true
+elif [ "$1" != "" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "USAGE: update [-c, --compile]"
+    exit
+fi
+
 dir=$(pwd)
 
 echo "-- render dotfiles"
 cd ~/.dots
 echo "y" | dm theme/.theme > /dev/null
-echo "-- make and install st"
-cd ~/.clones/st
-make install > /dev/null
-echo "-- make and install dmenu"
-cd ~/.clones/dmenu
-make install > /dev/null
+
+if [ $compile = true ]; then
+    echo "-- make and install st"
+    cd ~/.clones/st
+    make install > /dev/null
+    echo "-- make and install dmenu"
+    cd ~/.clones/dmenu
+    make install > /dev/null
+fi
 
 cd "$dir"

@@ -12,3 +12,5 @@ set fish_greeting ""
 
 alias poweroff="sudo poweroff"
 alias reboot="sudo reboot"
+
+alias less="less -r"
