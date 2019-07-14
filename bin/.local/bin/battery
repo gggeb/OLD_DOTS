@@ -19,7 +19,7 @@ STATUS="$(acpi | cut -d ' ' -f3 | tr -d ',')"
 
 CRITICAL=false
 
-if [ $PERCENTAGE -lt $CRITICALLY_LOW ]; then
+if [ "$PERCENTAGE" -lt "$CRITICALLY_LOW" ]; then
     CRITICAL=true
 fi
 
@@ -62,7 +62,7 @@ if [ $notify = true ]; then
     fi
 fi
 
-if [ $CRITICAL = true ] && [ $STATUS = "Discharging" ]; then
+if [ $CRITICAL = true ] && [ "$STATUS" = "Discharging" ]; then
     case $case in
         normal)
             $output "Battery Low"
