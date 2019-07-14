@@ -11,3 +11,5 @@ compton -b
 redshift &
 
 sxhkd &
+
+notify-send "BSPWM BEGUN"

@@ -1,6 +1,6 @@
 # reload sxhkd
 alt + shift + r
-    pkill -USR1 -x sxhkd
+    pkill -USR1 -x sxhkd && notify-send -u low "SXHKD RELOADED"
 
 ## launchers
 # launch terminal
@@ -13,11 +13,11 @@ alt + d
 
 ## media keys
 XF86AudioRaiseVolume
-    pamixer -i 3
+    ~/.local/bin/volume up
 XF86AudioLowerVolume
-    pamixer -d 3
+    ~/.local/bin/volume down
 XF86AudioMute
-    pamixer -t
+    ~/.local/bin/volume toggle
 XF86MonBrightnessUp
     xbacklight -inc 20
 XF86MonBrightnessDown
@@ -30,7 +30,7 @@ alt + shift + Escape
 
 # reload bspwm config
 alt + r
-    ~/.config/bspwm/config
+    ~/.config/bspwm/config && notify-send -u low "BSPWM RELOADED"
 
 # close/kill node
 alt + {_,shift + }q

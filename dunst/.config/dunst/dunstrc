@@ -1,7 +1,7 @@
 [global]
     follow = mouse
     
-    geometry = "0x4-32+32"
+    geometry = "128x4-32+32"
 
     indicate_hidden = yes
     shrink = no
@@ -10,7 +10,7 @@
     separator_height = 1
 
     padding = 24
-    horizontal_padding = 24
+    horizontal_padding = 0
 
     frame_width = 1
     frame_color = "#~#THEME_BORDER#~"
