@@ -1,7 +1,7 @@
 [global]
     follow = mouse
     
-    geometry = "128x4-32+32"
+    geometry = "192x4-32+32"
 
     indicate_hidden = yes
     shrink = no
