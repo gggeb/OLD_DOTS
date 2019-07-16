@@ -11,6 +11,13 @@ alt + Return
 alt + d
     menu
 
+## pings
+super + b
+    ~/.local/bin/battery -u -n
+
+super + t
+    notify-send $(date "+%H:%M")
+
 ## media keys
 XF86AudioRaiseVolume
     ~/.local/bin/volume up

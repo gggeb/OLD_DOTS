@@ -16,6 +16,8 @@ set expandtab ts=4 sw=4 ai
 filetype plugin on
 syntax on
 
+set backupcopy=yes
+
 let g:is_kornshell=1
 
 set background=light

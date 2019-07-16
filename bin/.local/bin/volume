@@ -1,9 +1,5 @@
 #!/bin/sh
 
-usage() {
-    echo "USAGE: volume <up|down|toggle>"
-}
-
 case $1 in
     [uU][pP])
         pamixer -i 3
@@ -13,15 +9,14 @@ case $1 in
         ;;
     [tT][oO][gG][gG][lL][eE])
         pamixer -t
+        if [ "$(pamixer --get-mute)" = "false" ]; then
+            notify-send -u low "VOLUME: $(pamixer --get-volume)%"
+        else
+            notify-send -u low "MUTED"
+        fi
         ;;
     *)
-        >&2 echo "invalid argument '$1'!"
+        echo "USAGE: volume <up|down|toggle>"
         exit
         ;;
 esac
-
-if [ "$(pamixer --get-mute)" = "false" ]; then
-    notify-send -u low "VOLUME: $(pamixer --get-volume)%"
-else
-    notify-send -u low "MUTED"
-fi
