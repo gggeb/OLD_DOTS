@@ -1,10 +1,20 @@
 #!/bin/sh
 
-OPTIONS="LAUNCH\nPOWER"
+OPTIONS="LAUNCH\nOUTPUT\nPOWER"
 ANSWER=$(echo "$OPTIONS" | dmenu)
 
 LAUNCH() {
     exec dmenu_run
+}
+
+OUTPUT() {
+    OPTIONS="DATE\nPACKAGES"
+    ANSWER=$(echo "$OPTIONS" | dmenu)
+
+    DATE() { date '+%a %d %b' | tr "[:lower:]" "[:upper:]"; }
+    PACKAGES() { echo "INSTALLED PACKAGES: $(xbps-query -l | wc -l)"; }
+
+    notify-send "$($ANSWER)"
 }
 
 POWER() {
