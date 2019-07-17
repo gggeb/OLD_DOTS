@@ -5,6 +5,8 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'Yggdroot/indentLine'
 
+Plug 'cespare/vim-toml'
+
 Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
@@ -32,7 +34,7 @@ set noshowmode
 let g:indentLine_char='▏'
 let g:indentLine_color_term=0
 
-let g:ctrlp_map = '<c-f>'
+set mouse=a
+let g:ctrlp_map = '<C-f>'
 
 noremap <silent> <C-t> :tabnew <CR>
-noremap <silent> <C-f> :Explore <CR>

@@ -13,7 +13,7 @@ alt + d
 
 ## pings
 super + b
-    ~/.local/bin/battery -u -n
+    ~/.local/bin/battery -n
 
 super + t
     notify-send $(date "+%H:%M")

@@ -4,7 +4,6 @@ usage() {
     echo "USAGE: battery [FLAGS]"
     echo "       -h, --help              output this message"
     echo "       -o, --only_critical     only output if critical"
-    echo "       -l/-u, --lower/--upper  output only in upper/lower case"
     echo "       -n, --notify            output to libnotify, not stdout"
 }
 
@@ -25,7 +24,6 @@ fi
 
 only_critical=false
 notify=false
-case="normal"
 
 while [ $# -gt 0 ]; do
     case $1 in
@@ -38,12 +36,6 @@ while [ $# -gt 0 ]; do
             ;;
         -n | --notify)
             notify=true
-            ;;
-        -l | --lower)
-            case="lower"
-            ;;
-        -u | --upper)
-            case="upper"
             ;;
         *)
             fail "invalid argument '$1'"
@@ -63,17 +55,16 @@ if [ $notify = true ]; then
 fi
 
 if [ $CRITICAL = true ] && [ "$STATUS" = "Discharging" ]; then
-    case $case in
-        normal)
-            $output "Battery Low"
-            ;;
-        lower)
-            $output "battery low"
-            ;;
-        upper)
-            $output "BATTERY LOW"
-            ;;
-    esac
+    remaining="$(acpi | cut -d ' ' -f5)"
+    if [ "$remaining" != "discharging" ]; then
+        if [ $notify = true ]; then
+            $output "BATTERY LOW - $PERCENTAGE%" "$remaining REMAINING"
+        else
+            $output "BATTERY LOW - $PERCENTAGE%: $remaining REMAINING"
+        fi
+    else
+        $output "BATTERY LOW"
+    fi
 else
     if [ $only_critical = false ]; then
         $output "$PERCENTAGE%"
