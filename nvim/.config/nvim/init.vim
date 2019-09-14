@@ -7,7 +7,8 @@ Plug 'Yggdroot/indentLine'
 
 Plug 'cespare/vim-toml'
 
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -35,6 +36,6 @@ let g:indentLine_char='▏'
 let g:indentLine_color_term=0
 
 set mouse=a
-let g:ctrlp_map = '<C-f>'
 
 noremap <silent> <C-t> :tabnew <CR>
+noremap <silent> <C-f> :Files <CR>
