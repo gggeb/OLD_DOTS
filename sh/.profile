@@ -11,6 +11,9 @@ export PAGER
 
 . ~/.theme
 
+TERM="st-256color"
+export TERM
+
 ENV="$HOME/.shrc"
 export ENV
 

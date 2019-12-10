@@ -28,7 +28,7 @@ static int bellvolume = 0;
 
 char *termname = "st-256color";
 
-unsigned int tabspaces = 4;
+unsigned int tabspaces = 8;
 
 static const char *colorname[] = {
 	"#~#THEME_BLACK#~",
@@ -61,13 +61,6 @@ unsigned int defaultbg = 0;
 static unsigned int defaultcs = 256;
 static unsigned int defaultrcs = 257;
 
-/*
- * Default shape of cursor
- * 2: Block ("█")
- * 4: Underline ("_")
- * 6: Bar ("|")
- * 7: Snowman ("☃")
- */
 static unsigned int cursorshape = 6;
 
 static unsigned int cols = 80;
@@ -79,15 +72,21 @@ static unsigned int mousebg = 0;
 
 static unsigned int defaultattr = 11;
 
+static uint forcemousemod = ShiftMask;
+
 static MouseShortcut mshortcuts[] = {
-	{ Button4,              XK_ANY_MOD,     "\031" },
-	{ Button5,              XK_ANY_MOD,     "\005" },
+	/* mask                 button   function        argument       release */
+	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
+/* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
+	/* mask                 keysym          function        argument */
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
@@ -105,8 +104,6 @@ static Shortcut shortcuts[] = {
 static KeySym mappedkeys[] = { -1 };
 
 static uint ignoremod = Mod2Mask|XK_SWITCH_MOD;
-
-static uint forceselmod = ShiftMask;
 
 static Key key[] = {
 	/* keysym           mask            string      appkey appcursor */

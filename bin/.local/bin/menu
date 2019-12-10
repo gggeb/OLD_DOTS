@@ -15,7 +15,7 @@ LAUNCH() {
             exec zathura
             ;;
         "IMAGE EDITOR")
-            exec aseprite
+            exec gimp
             ;;
         "TERMINAL")
             exec st

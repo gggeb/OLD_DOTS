@@ -4,9 +4,9 @@
 
 setxkbmap gb
 xsetroot -cursor_name left_ptr &
-hsetroot -solid "#$THEME_DARK_GREY"
 
-compton -b
+feh --bg-fill ~/.wall.jpg
+picom -b
 
 redshift &
 
