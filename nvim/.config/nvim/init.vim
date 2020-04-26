@@ -10,6 +10,10 @@ Plug 'cespare/vim-toml'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
+Plug 'junegunn/goyo.vim'
+
+Plug 'tikhomirov/vim-glsl'
+
 call plug#end()
 
 set number

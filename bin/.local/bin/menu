@@ -4,7 +4,7 @@ OPTIONS="LAUNCH\nOUTPUT\nPOWER"
 ANSWER=$(echo "$OPTIONS" | dmenu)
 
 LAUNCH() {
-    OPTIONS="WEB BROWSER\nPDF VIEWER\nIMAGE EDITOR\nTERMINAL\n..."
+    OPTIONS="WEB BROWSER\nPDF VIEWER\nPIXEL EDITOR\nTERMINAL\n..."
     ANSWER=$(echo "$OPTIONS" | dmenu)
 
     case $ANSWER in
@@ -14,8 +14,8 @@ LAUNCH() {
         "PDF VIEWER")
             exec zathura
             ;;
-        "IMAGE EDITOR")
-            exec gimp
+        "PIXEL EDITOR")
+            exec aseprite
             ;;
         "TERMINAL")
             exec st

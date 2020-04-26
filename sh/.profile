@@ -1,7 +1,9 @@
 # sh startup behaviour
 
-PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
+PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 export PATH
+
+. $HOME/.ghcup/env
 
 EDITOR=nvim
 PAGER=less
